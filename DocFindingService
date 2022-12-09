@@ -1,0 +1,36 @@
+package com.priority.model.document.find.service;
+
+import java.util.List;
+
+import com.priority.model.document.find.pojo.CustomerDetails;
+
+public class DocFindingService {
+
+	CustomerDetails temp = null;
+
+	public DocFindingService() {
+
+	}
+
+	public void isHKResident(List<CustomerDetails> customerDetailsList1) {
+		for (CustomerDetails customerDetails1 : customerDetailsList1) {
+			if (customerDetails1.getDocumentDesc().contains("National ID Card (with Photo)")
+					&& customerDetails1.getDocIssuerCountry().contains("Hong Kong")) {
+				temp = customerDetails1;
+				break;
+			} else if (customerDetails1.getDocumentDesc().contains("Resident ID Card (with Photo)")
+					&& customerDetails1.getDocIssuerCountry().contains("Hong Kong")) {
+				if (temp == null) {
+					temp = customerDetails1;
+				} else if ((!temp.getDocumentDesc().contains("National ID Card (with Photo)"))) {
+					temp = customerDetails1;
+				}
+			} else if (customerDetails1.getDocumentDesc().contains("Passport [Government Issued]")) {
+				if (temp == null) {
+					temp = customerDetails1;
+				}
+			}
+		}
+		System.out.println(temp);
+	}
+}
