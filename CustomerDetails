@@ -1,0 +1,70 @@
+package com.priority.model.document.find.pojo;
+
+public class CustomerDetails {
+
+	private int customerId;
+	private String residentCountry;
+	private int documentType;
+	private String documentDesc;
+	private String docIssuerCountry;
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getResidentCountry() {
+		return residentCountry;
+	}
+
+	public void setResidentCountry(String residentCountry) {
+		this.residentCountry = residentCountry;
+	}
+
+	public int getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(int documentType) {
+		this.documentType = documentType;
+	}
+
+	public String getDocumentDesc() {
+		return documentDesc;
+	}
+
+	public void setDocumentDesc(String documentDesc) {
+		this.documentDesc = documentDesc;
+	}
+
+	public String getDocIssuerCountry() {
+		return docIssuerCountry;
+	}
+
+	public void setDocIssuerCountry(String docIssuerCountry) {
+		this.docIssuerCountry = docIssuerCountry;
+	}
+
+	public CustomerDetails(int customerId, String residentCountry, int documentType, String documentDesc,
+			String docIssuerCountry) {
+		super();
+		this.customerId = customerId;
+		this.residentCountry = residentCountry;
+		this.documentType = documentType;
+		this.documentDesc = documentDesc;
+		this.docIssuerCountry = docIssuerCountry;
+	}
+
+	public CustomerDetails() {
+
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerID=" + customerId + ", ResidentCountry=" + residentCountry + ", DocumentType="
+				+ documentType + ", DocumentDesc=" + documentDesc + ", DocIssuerCountry=" + docIssuerCountry;
+	}
+}
