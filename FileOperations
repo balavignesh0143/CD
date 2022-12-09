@@ -1,0 +1,28 @@
+package com.priority.model.document.find.operations;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.priority.model.document.find.service.ExcelStoreOperationService;
+
+public class FileOperations {
+
+	private static ExcelStoreOperationService excelStoreOperationService = null;
+
+	public FileOperations() {
+		excelStoreOperationService = new ExcelStoreOperationService();
+	}
+
+	public void getCustomerDetails(int customerID) throws IOException {
+		FileInputStream file;
+		file = new FileInputStream("./src/main/webapp/Customer_Details.xlsx");
+		XSSFWorkbook workBook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workBook.getSheetAt(0);
+		workBook.close();
+		file.close();
+		excelStoreOperationService.excelToMap(customerID, sheet);
+	}
+}
