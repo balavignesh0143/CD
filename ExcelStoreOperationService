@@ -1,0 +1,38 @@
+package com.priority.model.document.find.service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+
+import com.priority.model.document.find.pojo.CustomerDetails;
+
+public class ExcelStoreOperationService {
+
+	private static CustomerDetails customerDetails = null;
+	private static DocFindingService docFindingService = null;
+
+	public ExcelStoreOperationService() {
+		customerDetails = new CustomerDetails();
+		docFindingService = new DocFindingService();
+	}
+
+	public void excelToMap(int customerID, XSSFSheet sheet) {
+		HashMap<Integer, List<CustomerDetails>> excelStoredMap = new HashMap<>();
+		List<CustomerDetails> customerDetailsList = new ArrayList<>();
+		for (int row = 1; row <= sheet.getLastRowNum(); row++) {
+			if (customerID == (int) sheet.getRow(row).getCell(0).getNumericCellValue()) {
+				customerDetails = new CustomerDetails();
+				customerDetails.setCustomerId((int) sheet.getRow(row).getCell(0).getNumericCellValue());
+				customerDetails.setResidentCountry(sheet.getRow(row).getCell(1).getStringCellValue());
+				customerDetails.setDocumentType((int) (sheet.getRow(row).getCell(2).getNumericCellValue()));
+				customerDetails.setDocumentDesc(sheet.getRow(row).getCell(3).getStringCellValue());
+				customerDetails.setDocIssuerCountry(sheet.getRow(row).getCell(4).getStringCellValue());
+				customerDetailsList.add(customerDetails);
+			}
+		}
+		excelStoredMap.put(customerID, customerDetailsList);
+		docFindingService.isHKResident(customerDetailsList);
+	}
+}
