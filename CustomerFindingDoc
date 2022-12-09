@@ -1,0 +1,29 @@
+package com.priority.model.document.find.engine;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import com.priority.model.document.find.operations.FileOperations;
+
+public class CustomerDocFindEngine {
+	private static FileOperations fileOperations = null;
+
+	private CustomerDocFindEngine() {
+		fileOperations = new FileOperations();
+	}
+
+	public static void main(String[] args) {
+		try {
+			CustomerDocFindEngine customerDocFindEngine = new CustomerDocFindEngine();
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Enter your customer id : ");
+			final int customerID = scanner.nextInt();
+			scanner.close();
+			System.out.println("Customer Details " + customerID + " Based on the Priority Order : " + "\n");
+			fileOperations.getCustomerDetails(customerID);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
